@@ -50,12 +50,12 @@
           <div id="axis" class="col-3">
             <h3>Axis Selection</h3>
             <div class="form-group">
-              <label for="exampleFormControlSelect1">X-Axis</label>
-              <select class="form-control" id="exampleFormControlSelect1">
+              <label for="xAxisSelection">X-Axis</label>
+              <select id="xAxisSelection" class="form-control">
                 <option>Fat</option>
-                <option>Sodium</option>
+                <option>Salt</option>
                 <option>Protein</option>
-                <option>Sugar</option>
+                <option>Sugars</option>
               </select>
             </div>
             <div class="form-group">
@@ -64,7 +64,7 @@
                 <option>Fat</option>
                 <option>Sodium</option>
                 <option>Protein</option>
-                <option>Sugar</option>
+                <option>Sugars</option>
               </select>
             </div>
           </div>
@@ -76,16 +76,18 @@
                 <option>Fat</option>
                 <option>Sodium</option>
                 <option>Protein</option>
-                <option>Sugar</option>
+                <option>Sugars</option>
               </select>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-2">
-      </div>
     </div>
-    <div id="graphDiv"></div>
+    <div class="d-flex justify-content-center buttonDiv">
+      <button id="filterButton" type="button" class="btn btn-primary btn-block" onclick="filter()">Filter</button>
+    </div>
+
+    <div id="graphDiv" class="d-flex justify-content-center"></div>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -93,7 +95,4 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script type='text/javascript' src='main.js'></script>
   </body>
-  <footer>
-    <script type='text/javascript' src='main.js'></script>
-  </footer>
 </html>

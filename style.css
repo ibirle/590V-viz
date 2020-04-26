@@ -38,3 +38,13 @@
     text-align: center;
     background-color: white;
 }
+
+#graphDiv {
+    padding: 2%;
+}
+
+#filterButton {
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-top: 1%;
+}

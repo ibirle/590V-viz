@@ -20,12 +20,14 @@ var svg = d3.select("#graphDiv")
           "translate(" + margin.left + "," + margin.top + ")");
 
 d3.json("recipes_with_nutritional_info.json", function(data){
-    console.log(data);
+  console.log(data);
   // Add X axis
   var x = d3.scaleLinear()
     .domain([0, 100])
     .range([ 0, width ]);
+
   svg.append("g")
+    .attr('id','xAxis')
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(x));
 
@@ -33,11 +35,14 @@ d3.json("recipes_with_nutritional_info.json", function(data){
   var y = d3.scaleLinear()
     .domain([0, 100])
     .range([ height, 0]);
+
   svg.append("g")
+    .attr('id','yAxis')
     .call(d3.axisLeft(y));
 
     //X Label
-    svg.append("text")             
+    svg.append("text")
+    .attr('id','xAxisLabel')             
     .attr("transform",
           "translate(" + (width/2) + " ," + 
                          (height + margin.top + 20) + ")")
@@ -46,6 +51,7 @@ d3.json("recipes_with_nutritional_info.json", function(data){
 
     //Y Label
     svg.append("text")
+    .attr('id','yAxisLabel') 
     .attr("transform", "rotate(-90)")
     .attr("y", 0 - margin.left)
     .attr("x",0 - (height / 2))
@@ -65,3 +71,42 @@ d3.json("recipes_with_nutritional_info.json", function(data){
       .style("fill", function (d) { return d3.color(d.fsa_lights_per100g.sugars); } )
 
 });
+
+function switchYAxis(value) {
+  var y = d3.scaleLinear()
+    .domain([0, 100])
+    .range([ height, 0]);
+    
+  yAxis.scale(yScale)
+  d3.select('#yAxis')
+    .transition().duration(1000)
+    .call(d3.axisLeft(y));
+  
+  d3.select('#yAxisLabel') // change the yAxisLabel
+    .text(value + " per 100g");
+
+  d3.selectAll('circle') // move the circles
+    .transition().duration(1000)
+    .delay(function (d,i) { return i*100})
+    .attr('cy',function (d) { return y(d.nutr_values_per100g[value]) });
+}
+
+function switchXAxis(value) {
+  var x = d3.scaleLinear()
+    .domain([0, 100])
+    .range([ 0, width ]);
+    
+  d3.select('#xAxis')
+    .call(d3.axisLeft(x));
+  
+  d3.select('#xAxisLabel') // change the yAxisLabel
+    .text(value + " per 100g");
+
+  d3.selectAll('circle') // move the circles
+    .attr('cx',function (d) { return x(d.nutr_values_per100g[value.toLowerCase()]) });
+}
+
+function filter(){
+  let xAxisValue = $("#xAxisSelection").val();
+  switchXAxis(xAxisValue);
+}
