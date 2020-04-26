@@ -8,17 +8,85 @@
     <link rel='stylesheet' href='style.css'>
   </head>
   <body>
-    <div class="graph-selectors">
-      <div>
-        <div id="search-input" class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Search by Ingredient" aria-label="Search by Ingredient" aria-describedby="basic-addon2">
-          <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button">+</button>
+    <div class="row">
+      <div class="col-2">
+
+      </div>
+      <div class="graph-selectors col-8">
+        <div>
+          <div id="search-input" class="input-group mb-3">
+            <input id="ing" type="text" class="form-control" placeholder="Search by Ingredient" aria-label="Search by Ingredient" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <button id="add" class="btn btn-dark" type="button">+</button>
+            </div>
           </div>
         </div>
+        <div id="filter-ing">
+          <ul id="ingredients">
+          </ul>
+        </div>
+        <div id="filter-options" class="row d-flex justify-content-around">
+          <div id="allergen" class="col-3">
+            <h3>Allergen Selection</h3>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox">
+              <label class="form-check-label" for="Dairy">
+                Dairy
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox">
+              <label class="form-check-label" for="Meat">
+                Meat
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox">
+              <label class="form-check-label" for="Nuts">
+                Nuts
+              </label>
+            </div>
+          </div>
+          <div id="axis" class="col-3">
+            <h3>Axis Selection</h3>
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">X-Axis</label>
+              <select class="form-control" id="exampleFormControlSelect1">
+                <option>Fat</option>
+                <option>Sodium</option>
+                <option>Protein</option>
+                <option>Sugar</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Y-Axis</label>
+              <select class="form-control" id="exampleFormControlSelect1">
+                <option>Fat</option>
+                <option>Sodium</option>
+                <option>Protein</option>
+                <option>Sugar</option>
+              </select>
+            </div>
+          </div>
+          <div id="coloring" class="col-3">
+            <h3>Color Selection</h3>
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Color by</label>
+              <select class="form-control" id="exampleFormControlSelect1">
+                <option>Fat</option>
+                <option>Sodium</option>
+                <option>Protein</option>
+                <option>Sugar</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+      <div class="col-2">
+
       </div>
     </div>
-
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
