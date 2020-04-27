@@ -1,11 +1,21 @@
 $("#add").click(function() {
-    let text = $("#ing").val();
-    console.log(text);
-    let li = $('<li/>');
-    li.append("<span>" + text + "</span>");
-    console.log(li);
-    $("#ingredients").append(li);
+  let text = $("#ing").val();
+  if (text === '') {
+    return;
+  }
+  let li = $('<li/>');
+  li.append("<span>" + text + "</span>");
+  li.append('<button type="button" onClick="removeIng(\'' + text + '\')" class="remove-ing btn btn-primary btn-sm">-</button>');
+  li.addClass("col-2");
+  li.addClass("ingredient");
+  li.attr("id", text);
+  $("#ingredients").append(li);
+  $('#ing').val("");
 });
+
+function removeIng(ing) {
+  $("#" + ing).remove();
+}
 
 var margin = {top: 10, right: 30, bottom: 50, left: 60},
     width = 900 - margin.left - margin.right,
@@ -69,8 +79,26 @@ d3.json("recipes_with_nutritional_info.json", function(data){
     .append("circle")
       .attr("cx", function (d) { return x(d.nutr_values_per100g.fat); } )
       .attr("cy", function (d) { return y(d.nutr_values_per100g.fat); } )
-      .attr("r", 1.5)
+      .attr("r", 3)
       .style("fill", function (d) { return d3.color(d.fsa_lights_per100g.fat); } )
+      .on('mouseover', function () {
+        d3.select(this)
+          .transition()
+          .duration(500)
+          .attr('r',12)
+          .attr('stroke-width',3)
+      })
+      .on('mouseout', function () {
+        d3.select(this)
+          .transition()
+          .duration(500)
+          .attr('r',3)
+          .attr('stroke-width',1)
+      })
+      .on('click', function(d) {window.open(d.url);})
+      .append('title')
+      .text(function (d) { return "Title of Recipe: " + d.title + "\n# of Steps in Recipe: " + d.instructions.length + "\nFat per 100g: " + d.nutr_values_per100g.fat + "\nProtein per 100g: " + d.nutr_values_per100g.protein + "\nSugars at per 100g: " + d.nutr_values_per100g.sugars;})
+
 });
 
 function switchYAxis(value) {
