@@ -48,3 +48,11 @@
     margin-right: 30%;
     margin-top: 1%;
 }
+
+ul {
+    list-style-type: none;
+}
+
+.remove-ing {
+    margin-left: 7%;
+}

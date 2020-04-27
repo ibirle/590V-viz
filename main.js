@@ -1,11 +1,21 @@
 $("#add").click(function() {
-    let text = $("#ing").val();
-    console.log(text);
-    let li = $('<li/>');
-    li.append("<span>" + text + "</span>");
-    console.log(li);
-    $("#ingredients").append(li);
+  let text = $("#ing").val();
+  if (text === '') {
+    return;
+  }
+  let li = $('<li/>');
+  li.append("<span>" + text + "</span>");
+  li.append('<button type="button" onClick="removeIng(\'' + text + '\')" class="remove-ing btn btn-primary btn-sm">-</button>');
+  li.addClass("col-2");
+  li.addClass("ingredient");
+  li.attr("id", text);
+  $("#ingredients").append(li);
+  $('#ing').val("");
 });
+
+function removeIng(ing) {
+  $("#" + ing).remove();
+}
 
 var margin = {top: 10, right: 30, bottom: 50, left: 60},
     width = 900 - margin.left - margin.right,
