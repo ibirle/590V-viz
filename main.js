@@ -57,38 +57,35 @@ d3.json("recipes_with_nutritional_info.json", function(data){
     .attr("x",0 - (height / 2))
     .attr("dy", "1em")
     .style("text-anchor", "middle")
-    .text("Salt per 100g");  
+    .text("Fat per 100g");  
 
   // Add dots
-  svg.append('g')
+  svg
+    .append('g')
     .selectAll("dot")
     .data(data)
-    .enter()
+    .enter()      
+
     .append("circle")
       .attr("cx", function (d) { return x(d.nutr_values_per100g.fat); } )
-      .attr("cy", function (d) { return y(d.nutr_values_per100g.salt); } )
+      .attr("cy", function (d) { return y(d.nutr_values_per100g.fat); } )
       .attr("r", 1.5)
-      .style("fill", function (d) { return d3.color(d.fsa_lights_per100g.sugars); } )
-
+      .style("fill", function (d) { return d3.color(d.fsa_lights_per100g.fat); } )
 });
 
 function switchYAxis(value) {
   var y = d3.scaleLinear()
     .domain([0, 100])
     .range([ height, 0]);
-    
-  yAxis.scale(yScale)
+
   d3.select('#yAxis')
-    .transition().duration(1000)
     .call(d3.axisLeft(y));
   
   d3.select('#yAxisLabel') // change the yAxisLabel
     .text(value + " per 100g");
 
   d3.selectAll('circle') // move the circles
-    .transition().duration(1000)
-    .delay(function (d,i) { return i*100})
-    .attr('cy',function (d) { return y(d.nutr_values_per100g[value]) });
+    .attr('cy',function (d) { return y(d.nutr_values_per100g[value.toLowerCase()]) });
 }
 
 function switchXAxis(value) {
@@ -97,7 +94,8 @@ function switchXAxis(value) {
     .range([ 0, width ]);
     
   d3.select('#xAxis')
-    .call(d3.axisLeft(x));
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x));
   
   d3.select('#xAxisLabel') // change the yAxisLabel
     .text(value + " per 100g");
@@ -106,7 +104,37 @@ function switchXAxis(value) {
     .attr('cx',function (d) { return x(d.nutr_values_per100g[value.toLowerCase()]) });
 }
 
+function switchColor(value) {
+  d3.selectAll('circle')
+  .style("fill", function (d) { return d3.color(d.fsa_lights_per100g[value.toLowerCase()]);});
+}
+
+function filterColor(greenToggle, orangeToggle, redToggle, value) {
+  colorM = {}
+  colorM["green"] = greenToggle
+  colorM["orange"] = orangeToggle
+  colorM["red"] = redToggle
+  d3.selectAll('circle')
+  .style("fill",function (d) { 
+    let color = d3.color(d.fsa_lights_per100g[value.toLowerCase()]);
+    if(colorM[d.fsa_lights_per100g[value.toLowerCase()]]){
+      return color;
+    }
+    return "none";
+  });
+}
 function filter(){
   let xAxisValue = $("#xAxisSelection").val();
   switchXAxis(xAxisValue);
+
+  let yAxisValue = $("#yAxisSelection").val();
+  switchYAxis(yAxisValue);
+
+  let colorValue =  $("#colorSelection").val();
+  switchColor(colorValue);
+
+  let greenToggle = $("#greenBox").prop( "checked" );
+  let orangeToggle = $("#orangeBox").prop( "checked" );
+  let redToggle = $("#redBox").prop( "checked" );
+  filterColor(greenToggle, orangeToggle, redToggle ,colorValue);
 }
