@@ -77,8 +77,24 @@ d3.json("recipes_with_nutritional_info.json", function(data){
     .append("circle")
       .attr("cx", function (d) { return x(d.nutr_values_per100g.fat); } )
       .attr("cy", function (d) { return y(d.nutr_values_per100g.salt); } )
-      .attr("r", 1.5)
+      .attr("r", 3)
       .style("fill", function (d) { return d3.color(d.fsa_lights_per100g.sugars); } )
+      .on('mouseover', function () {
+        d3.select(this)
+          .transition()
+          .duration(500)
+          .attr('r',12)
+          .attr('stroke-width',3)
+      })
+      .on('mouseout', function () {
+        d3.select(this)
+          .transition()
+          .duration(500)
+          .attr('r',3)
+          .attr('stroke-width',1)
+      })
+      .append('title')
+      .text(function (d) { return d.title })
 
 });
 
