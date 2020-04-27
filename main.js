@@ -93,8 +93,9 @@ d3.json("recipes_with_nutritional_info.json", function(data){
           .attr('r',3)
           .attr('stroke-width',1)
       })
+      .on('click', function(d) {window.open(d.url);})
       .append('title')
-      .text(function (d) { return d.title })
+      .text(function (d) { return "Title of Recipe: " + d.title + "\n# of Steps in Recipe: " + d.instructions.length + "\nFat per 100g: " + d.nutr_values_per100g.fat + "\nProtein per 100g: " + d.nutr_values_per100g.protein + "\nSugars at per 100g: " + d.nutr_values_per100g.sugars;})
 
 });
 
