@@ -166,46 +166,68 @@ function filterColor(greenToggle, orangeToggle, redToggle, value) {
     return "none";
   });
 }
-function filterAllergens(meatToggle, nutToggle, dairyToggle) {
-    console.log(meatToggle);
-    var meat = ["chicken","steak","beef","calamari","shrimp","pork","rib","fish","haddock","cod","halibut","squid","bacon","turkey","ham","lamb","salami","hot dog","veal","meatball","crab","liver","pate","anchovy","rabbit","quail"];
+function filterAllergens(meatToggle, nutToggle, dairyToggle,value) {
+var meat = ["chicken","steak","beef","calamari","shrimp","pork","rib","fish","haddock","cod","halibut","squid","bacon","turkey","ham","lamb","salami","hot dog","veal","meatball","crab","liver","pate","anchovy","rabbit","quail"];
     var nut = ["hazelnut", "almond","peanut","walnut","cashew","pine nut","pecan","brazil nut","pistachio","macadamia","chestnut"];
     var dairy = ["milk","half and half","cream","butter","yogurt","cheese","parmesan","romano","gouda","brie","cheddar","curd","custard","eggnog","dulce de leche","ice cream","gelato","ghee","kefir","feta","mozzarella","paneer","ricotta","sour cream","whey"];
+
     d3.selectAll('circle')
     .style("fill",function (d){
-        
+       
         let ing = d.ingredients;
+   
         if(meatToggle){
         for(var m in meat){
-            for( var i in ing){
-                if(i.includes(m)){
-                    return "none";
-                }
+     
+            for(i in ing){
+                for(k in ing[i]){
                     
-            }
+                    if(ing[i][k].includes(meat[m])){
+                        
+                        
+                        return "none";
+                        
+                    }
+                }
+        }
+         
         }    
         }
         if(nutToggle){
         for(var m in nut){
-            for( var i in ing){
-                if(i.includes(m)){
-                    return "none";
-                }
+     
+            for(i in ing){
+                for(k in ing[i]){
                     
-            }
+                    if(ing[i][k].includes(nut[m])){
+                        
+                        
+                        return "none";
+                        
+                    }
+                }
+        }
+         
         }    
         }
         if(dairyToggle){
         for(var m in dairy){
-            for( var i in ing){
-                if(i.includes(m)){
-                    return "none";
-                }
+     
+            for(i in ing){
+                for(k in ing[i]){
                     
-            }
+                    if(ing[i][k].includes(dairy[m])){
+                        
+                        
+                        return "none";
+                        
+                    }
+                }
+        }
+         
         }    
         }
-     
+     return value;
         
     }  );
 }
@@ -230,6 +252,6 @@ function filter(){
   let meatToggle = $("#Meat").prop( "checked" );
   let nutToggle = $("#Nuts").prop( "checked" );
   let dairyToggle = $("#Dairy").prop( "checked" );
-  filterAllergens(meatToggle, nutToggle, dairyToggle);
+  filterAllergens(meatToggle, nutToggle, dairyToggle,colorValue);
     
 }
