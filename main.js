@@ -167,7 +167,7 @@ function filterColor(greenToggle, orangeToggle, redToggle, value) {
     return "none";
   });
 }
-function filterAllergens(meatToggle, nutToggle, dairyToggle,value) {
+function filterAllergens(meatToggle, nutToggle, dairyToggle, value) {
 var meat = ["chicken","steak","beef","calamari","shrimp","pork","rib","fish","haddock","cod","halibut","squid","bacon","turkey","ham","lamb","salami","hot dog","veal","meatball","crab","liver","pate","anchovy","rabbit","quail"];
     var nut = ["hazelnut", "almond","peanut","walnut","cashew","pine nut","pecan","brazil nut","pistachio","macadamia","chestnut"];
     var dairy = ["milk","half and half","cream","butter","yogurt","cheese","parmesan","romano","gouda","brie","cheddar","curd","custard","eggnog","dulce de leche","ice cream","gelato","ghee","kefir","feta","mozzarella","paneer","ricotta","sour cream","whey"];
@@ -228,10 +228,12 @@ var meat = ["chicken","steak","beef","calamari","shrimp","pork","rib","fish","ha
          
         }    
         }
-     return value;
+
+      return d3.select(this).style('fill');
         
     }  );
 }
+
 function filter(){
 
 
@@ -253,11 +255,11 @@ function filter(){
   let greenToggle = $("#greenBox").prop( "checked" );
   let orangeToggle = $("#orangeBox").prop( "checked" );
   let redToggle = $("#redBox").prop( "checked" );
-  filterColor(greenToggle, orangeToggle, redToggle ,colorValue);
+  filterColor(greenToggle, orangeToggle, redToggle , colorValue);
     
   let meatToggle = $("#Meat").prop( "checked" );
   let nutToggle = $("#Nuts").prop( "checked" );
   let dairyToggle = $("#Dairy").prop( "checked" );
-  filterAllergens(meatToggle, nutToggle, dairyToggle,colorValue);
+  filterAllergens(meatToggle, nutToggle, dairyToggle, colorValue);
     
 }
