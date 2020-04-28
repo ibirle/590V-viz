@@ -36,6 +36,7 @@ var svg = d3.select("#graphDiv")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
+  .attr('id','graph')
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 
@@ -168,7 +169,12 @@ function filterColor(greenToggle, orangeToggle, redToggle, value) {
 }
 function filter(){
 
+
+  console.log(d3.zoomIdentity);
   zoom.transform(svg, d3.zoomIdentity);
+
+  svg.attr("transform",
+  "translate(" + margin.left + "," + margin.top + ")");
 
   let xAxisValue = $("#xAxisSelection").val();
   switchXAxis(xAxisValue);
