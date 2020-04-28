@@ -5,7 +5,7 @@ $("#add").click(function() {
   }
   let li = $('<li/>');
   li.append('<span class="ingSpan">' + text + "</span>");
-  li.append('<button type="button" onClick="removeIng(\'' + text + '\')" class="remove-ing btn btn-primary btn-sm">-</button>');
+  li.append('<button type="button" onClick="removeIng(\'' + text + '\')" class="remove-ing btn btn-dark btn-sm">-</button>');
   li.addClass("col-2");
   li.addClass("ingredient");
   li.attr("id", text);
