@@ -8,19 +8,108 @@
     <link rel='stylesheet' href='style.css'>
   </head>
   <body>
-    <div class="graph-selectors">
-      <div>
-        <div id="search-input" class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Search by Ingredient" aria-label="Search by Ingredient" aria-describedby="basic-addon2">
-          <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button">+</button>
+    <div class="row">
+      <div class="col-2">
+
+      </div>
+      <div class="graph-selectors col-8">
+        <div>
+          <div id="search-input" class="input-group mb-3">
+            <input id="ing" type="text" class="form-control" placeholder="Search by Ingredient" aria-label="Search by Ingredient" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <button id="add" class="btn btn-dark" type="button">+</button>
+            </div>
           </div>
-          
+        </div>
+        <div id="filter-ing">
+          <ul id="ingredients" class="row">
+          </ul>
+        </div>
+        <div id="filter-options" class="row d-flex justify-content-around">
+          <div id="allergen" class="col-3">
+            <h3>Allergen Selection</h3>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox">
+              <label class="form-check-label" for="Dairy">
+                Dairy
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox">
+              <label class="form-check-label" for="Meat">
+                Meat
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox">
+              <label class="form-check-label" for="Nuts">
+                Nuts
+              </label>
+            </div>
+          </div>
+          <div id="axis" class="col-3">
+            <h3>Axis Selection</h3>
+            <div class="form-group">
+              <label for="xAxisSelection">X-Axis</label>
+              <select id="xAxisSelection" class="form-control">
+                <option>Fat</option>
+                <option>Salt</option>
+                <option>Protein</option>
+                <option>Sugars</option>
+                <option>Saturates</option>
+                <option>Energy</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="yAxisSelection">Y-Axis</label>
+              <select class="form-control" id="yAxisSelection">
+                <option>Fat</option>
+                <option>Salt</option>
+                <option>Protein</option>
+                <option>Sugars</option>
+                <option>Saturates</option>
+                <option>Energy</option>
+              </select>
+            </div>
+          </div>
+          <div id="coloring" class="col-3">
+            <h3>Color Selection</h3>
+            <div class="form-group">
+              <label for="colorSelection">Color by</label>
+              <select class="form-control" id="colorSelection">
+                <option>Fat</option>
+                <option>Salt</option>
+                <option>Saturates</option>
+                <option>Sugars</option>
+              </select>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" checked="checked" id="greenBox">
+                  <label class="form-check-label" for="greenBox">
+                    Green
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" checked="checked" id="orangeBox">
+                  <label class="form-check-label" for="orangeBox">
+                    Orange
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" checked="checked" id="redBox">
+                  <label class="form-check-label" for="redBox">
+                    Red
+                  </label>
+                </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    <div class="d-flex justify-content-center buttonDiv">
+      <button id="filterButton" type="button" class="btn btn-primary btn-block" onclick="filter()">Filter</button>
+    </div>
 
-    <div id="graphDiv"></div>
+    <div id="graphDiv" class="d-flex justify-content-center"></div>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -28,7 +117,4 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script type='text/javascript' src='main.js'></script>
   </body>
-  <footer>
-    <script type='text/javascript' src='main.js'></script>
-  </footer>
 </html>

@@ -1,14 +1,58 @@
 .graph-selectors {
     width: 60%;
     height: 40%;
-    left: 20%;
-    top: 10%;
     background-color: gray;
 }
 
 #search-input {
     width: 60%;
     left: 20%;
-    background-color: aqua;
     padding: 1%;
+}
+
+#filter-ing {
+    width: 100%;
+    min-height: 15%;
+    background-color: gray;
+}
+
+#filter-options {
+    padding-top: 2%;
+    height: 60%;
+    padding-bottom: 2%;
+    background-color: grey;
+}
+
+#allergen {
+    width: 90%;
+    text-align: center;
+    background-color: white;
+}
+
+#axis {
+    text-align: center;
+    background-color: white;
+}
+
+#coloring {
+    text-align: center;
+    background-color: white;
+}
+
+#graphDiv {
+    padding: 2%;
+}
+
+#filterButton {
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-top: 1%;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.remove-ing {
+    margin-left: 7%;
 }
