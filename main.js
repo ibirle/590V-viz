@@ -109,18 +109,6 @@ d3.json("recipes_with_nutritional_info.json", function(data){
       .append('title')
       .text(function (d) { return "Title of Recipe: " + d.title + "\n# of Steps in Recipe: " + d.instructions.length + "\nFat per 100g: " + d.nutr_values_per100g.fat + "\nProtein per 100g: " + d.nutr_values_per100g.protein + "\nSugars at per 100g: " + d.nutr_values_per100g.sugars;})
 
-
-  // function filterOutData(inputValues) {
-  //   console.log("insideFilter")
-  //   //Useful example: https://www.d3-graph-gallery.com/graph/line_filter.html
-
-  //   // Create a new dataset
-  //   var filteredDownData = data.filter(function(d){return d.nutr_values_per100g.fat < 12;})
-
-  //   // With the new data now we need to update the dots
-  //   dots
-  //       .data(filteredDownData)
-  // }
 });
 
 function switchFilterOut(searchTerms){
