@@ -52,7 +52,6 @@ var svg = d3.select("#graphDiv")
           "translate(" + margin.left + "," + margin.top + ")");
 
 d3.json("recipes_with_nutritional_info.json", function(data){
-  console.log(data);
   // Add X axis
   var x = d3.scaleLinear()
     .domain([0, 100])
