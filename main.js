@@ -4,7 +4,7 @@ $("#add").click(function() {
     return;
   }
   let li = $('<li/>');
-  li.append("<span>" + text + "</span>");
+  li.append('<span class="ingSpan">' + text + "</span>");
   li.append('<button type="button" onClick="removeIng(\'' + text + '\')" class="remove-ing btn btn-primary btn-sm">-</button>');
   li.addClass("col-2");
   li.addClass("ingredient");
@@ -12,6 +12,14 @@ $("#add").click(function() {
   $("#ingredients").append(li);
   $('#ing').val("");
 });
+
+let ingToFilter = [];
+
+function ingredientsFromList() {
+  $(".ingSpan").each(function() {
+    ingToFilter.push($(this).text());
+  });
+}
 
 function removeIng(ing) {
   $("#" + ing).remove();
@@ -233,7 +241,7 @@ var meat = ["chicken","steak","beef","calamari","shrimp","pork","rib","fish","ha
     }  );
 }
 function filter(){
-
+  ingredientsFromList();
 
   console.log(d3.zoomIdentity);
   zoom.transform(svg, d3.zoomIdentity);
