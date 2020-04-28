@@ -16,10 +16,13 @@ $("#add").click(function() {
 let ingToFilter = [];
 
 function ingredientsFromList() {
+  let ingToFilter = [];
   $(".ingSpan").each(function() {
     ingToFilter.push($(this).text());
   });
+  return ingToFilter;
 }
+
 
 function removeIng(ing) {
   $("#" + ing).remove();
@@ -76,7 +79,7 @@ d3.json("recipes_with_nutritional_info.json", function(data){
           "translate(" + (width/2) + " ," + 
                          (height + margin.top + 20) + ")")
     .style("text-anchor", "middle")
-    .text("Fat per 100g");
+    .text("Fat grams per 100g");
 
     //Y Label
     svg.append("text")
@@ -86,11 +89,11 @@ d3.json("recipes_with_nutritional_info.json", function(data){
     .attr("x",0 - (height / 2))
     .attr("dy", "1em")
     .style("text-anchor", "middle")
-    .text("Fat per 100g");  
+    .text("Fat grams per 100g");  
 
 
   // Add dots
-  svg
+  var dots = svg
     .append('g')
     .selectAll("dot")
     .data(data)
@@ -118,9 +121,30 @@ d3.json("recipes_with_nutritional_info.json", function(data){
       .append('title')
       .text(function (d) { return "Title of Recipe: " + d.title + "\n# of Steps in Recipe: " + d.instructions.length + "\nFat per 100g: " + d.nutr_values_per100g.fat + "\nProtein per 100g: " + d.nutr_values_per100g.protein + "\nSugars at per 100g: " + d.nutr_values_per100g.sugars;})
 
-
 });
 
+function switchFilterOut(searchTerms){
+  // Input: Array of Strings of search terms to match
+
+  d3.selectAll('circle').style("fill",function (d){ 
+    // First lets build up the ingredients into a single string
+    var ingListStr = ""
+    for (var idx in d.ingredients) {
+      substr = d.ingredients[idx]["text"] + " "
+      ingListStr += substr.toLowerCase()
+    }
+
+    // Now lets go through and see if any of our terms match the ingredients string we built above
+    for (var term in searchTerms){
+      term = searchTerms[term].toLowerCase()
+      if (!(ingListStr.includes(term))){
+        return "none"
+      }
+    }
+    return d3.select(this).style('fill')
+  });
+  
+}
 
 
 function switchYAxis(value) {
@@ -133,7 +157,7 @@ function switchYAxis(value) {
     .call(d3.axisLeft(y));
   
   d3.select('#yAxisLabel') // change the yAxisLabel
-    .text(value + " per 100g");
+    .text(value + " grams per 100g");
 
   d3.selectAll('circle') // move the circles
     .attr('cy',function (d) { return y(d.nutr_values_per100g[yValue]) });
@@ -150,7 +174,7 @@ function switchXAxis(value) {
     .call(d3.axisBottom(x));
   
   d3.select('#xAxisLabel') // change the yAxisLabel
-    .text(value + " per 100g");
+    .text(value + " grams per 100g");
 
   d3.selectAll('circle') // move the circles
     .attr('cx',function (d) { return x(d.nutr_values_per100g[xValue]) });
@@ -263,11 +287,12 @@ function filter(){
   let greenToggle = $("#greenBox").prop( "checked" );
   let orangeToggle = $("#orangeBox").prop( "checked" );
   let redToggle = $("#redBox").prop( "checked" );
-  filterColor(greenToggle, orangeToggle, redToggle , colorValue);
+  filterColor(greenToggle, orangeToggle, redToggle ,colorValue);
+
+  switchFilterOut(ingredientsFromList());
     
   let meatToggle = $("#Meat").prop( "checked" );
   let nutToggle = $("#Nuts").prop( "checked" );
   let dairyToggle = $("#Dairy").prop( "checked" );
   filterAllergens(meatToggle, nutToggle, dairyToggle, colorValue);
-    
 }
