@@ -13,12 +13,13 @@ $("#add").click(function() {
   $('#ing').val("");
 });
 
-let ingToFilter = [];
 
 function ingredientsFromList() {
+  let ingToFilter = [];
   $(".ingSpan").each(function() {
     ingToFilter.push($(this).text());
   });
+  return ingToFilter;
 }
 
 function removeIng(ing) {
@@ -242,6 +243,33 @@ var meat = ["chicken","steak","beef","calamari","shrimp","pork","rib","fish","ha
     }  );
 }
 
+function filterIng(ingList){
+  d3.selectAll('circle')
+    .style("fill",function (d){
+       
+        let ing = d.ingredients;
+        for(var j in ingList){
+
+            let includeIng = false;
+            for(i in ing){
+                for(k in ing[i]){
+                    
+                    if(ing[i][k].includes(ingList[j])){
+                        includeIng = true;
+                    }
+                }
+            }
+            if(!includeIng)
+            {
+              return "none";
+            }
+         
+        }    
+        return d3.select(this).style('fill');
+    });
+
+}
+
 function filter(){
   ingredientsFromList();
 
@@ -269,5 +297,6 @@ function filter(){
   let nutToggle = $("#Nuts").prop( "checked" );
   let dairyToggle = $("#Dairy").prop( "checked" );
   filterAllergens(meatToggle, nutToggle, dairyToggle, colorValue);
-    
+
+  filterIng(ingredientsFromList());
 }
