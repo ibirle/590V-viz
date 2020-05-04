@@ -1,5 +1,5 @@
 # Recipe Visualization
 
-# Running the Visualizaton
+## Running the Visualizaton
 
-* Simply livepreview the index.html file from within this directory
+* Simply Live Preview the index.html file from within this directory
