@@ -7,8 +7,8 @@ Live demo: https://ibirle.github.io/590V-viz/
 * Click a dot to go to that recipes URL
 * Zoom to look closer at a section of the chart
 * Search by indgredients to only see recipes with that ingredient
-* Check a dietary restrictions to exlude recipes in those categories
-* Change the way the dots are colored and what the axis mean
-
+* Select a dietary restrictions to exclude recipes in those categories
+* Control the coloring of dots by FSA guidelines for different nutrients
+* Switch the what is displayed on each axis to customize the exploration
 
 Data thanks to: http://pic2recipe.csail.mit.edu/
