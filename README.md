@@ -9,6 +9,6 @@ Live demo: https://ibirle.github.io/590V-viz/
 * Search by indgredients to only see recipes with that ingredient
 * Select a dietary restrictions to exclude recipes in those categories
 * Control the coloring of dots by FSA guidelines for different nutrients
-* Switch the what is displayed on each axis to customize the exploration
+* Switch what is displayed on each axis to customize the exploration
 
 Data thanks to: http://pic2recipe.csail.mit.edu/
