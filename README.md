@@ -2,7 +2,7 @@
 This project was created to provide an easy way to explore recipes.  
 Live demo: https://ibirle.github.io/590V-viz/index.html  
 
-##Guide:  
+## Guide:  
 * Hover a dot to see more information on a recipe
 * Click a dot to go to that recipes URL
 * Zoom to look closer at a section of the chart
