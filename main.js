@@ -42,7 +42,7 @@ var margin = {top: 10, right: 30, bottom: 50, left: 60},
 
 var svg = d3.select("#graphDiv")
   .append("svg")
-  .attr('id','graph')  
+  .attr('id','graph')
   .call(zoom)
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -51,7 +51,7 @@ var svg = d3.select("#graphDiv")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 
-d3.json("recipes_with_nutritional_info.json", function(data){
+d3.json("small_recipes.json", function(data){
   // Add X axis
   var x = d3.scaleLinear()
     .domain([0, 100])
@@ -73,22 +73,22 @@ d3.json("recipes_with_nutritional_info.json", function(data){
 
     //X Label
     svg.append("text")
-    .attr('id','xAxisLabel')             
+    .attr('id','xAxisLabel')
     .attr("transform",
-          "translate(" + (width/2) + " ," + 
+          "translate(" + (width/2) + " ," +
                          (height + margin.top + 20) + ")")
     .style("text-anchor", "middle")
     .text("Fat grams per 100g");
 
     //Y Label
     svg.append("text")
-    .attr('id','yAxisLabel') 
+    .attr('id','yAxisLabel')
     .attr("transform", "rotate(-90)")
     .attr("y", 0 - margin.left)
     .attr("x",0 - (height / 2))
     .attr("dy", "1em")
     .style("text-anchor", "middle")
-    .text("Fat grams per 100g");  
+    .text("Fat grams per 100g");
 
 
   // Add dots
@@ -96,7 +96,7 @@ d3.json("recipes_with_nutritional_info.json", function(data){
     .append('g')
     .selectAll("dot")
     .data(data)
-    .enter()     
+    .enter()
     .append("circle")
       .attr("cx", function (d) { return x(d.nutr_values_per100g[xValue]); } )
       .attr("cy", function (d) { return y(d.nutr_values_per100g[yValue]); } )
@@ -125,7 +125,7 @@ d3.json("recipes_with_nutritional_info.json", function(data){
 function switchFilterOut(searchTerms){
   // Input: Array of Strings of search terms to match
 
-  d3.selectAll('circle').style("fill",function (d){ 
+  d3.selectAll('circle').style("fill",function (d){
     // First lets build up the ingredients into a single string
     var ingListStr = ""
     for (var idx in d.ingredients) {
@@ -142,7 +142,7 @@ function switchFilterOut(searchTerms){
     }
     return d3.select(this).style('fill')
   });
-  
+
 }
 
 
@@ -154,7 +154,7 @@ function switchYAxis(value) {
 
   d3.select('#yAxis')
     .call(d3.axisLeft(y));
-  
+
   d3.select('#yAxisLabel') // change the yAxisLabel
     .text(value + " grams per 100g");
 
@@ -167,11 +167,11 @@ function switchXAxis(value) {
   var x = d3.scaleLinear()
     .domain([0, 100])
     .range([ 0, width ]);
-    
+
   d3.select('#xAxis')
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(x));
-  
+
   d3.select('#xAxisLabel') // change the yAxisLabel
     .text(value + " grams per 100g");
 
@@ -190,7 +190,7 @@ function filterColor(greenToggle, orangeToggle, redToggle, value) {
   colorM["orange"] = orangeToggle
   colorM["red"] = redToggle
   d3.selectAll('circle')
-  .style("fill",function (d) { 
+  .style("fill",function (d) {
     let color = d3.color(d.fsa_lights_per100g[value.toLowerCase()]);
     if(colorM[d.fsa_lights_per100g[value.toLowerCase()]]){
       return color;
@@ -205,63 +205,63 @@ var meat = ["chicken","steak","beef","calamari","shrimp","pork","rib","fish","ha
 
     d3.selectAll('circle')
     .style("fill",function (d){
-       
+
         let ing = d.ingredients;
-   
+
         if(meatToggle){
         for(var m in meat){
-     
+
             for(i in ing){
                 for(k in ing[i]){
-                    
+
                     if(ing[i][k].includes(meat[m])){
-                        
-                        
+
+
                         return "none";
-                        
+
                     }
                 }
         }
-         
-        }    
+
+        }
         }
         if(nutToggle){
         for(var m in nut){
-     
+
             for(i in ing){
                 for(k in ing[i]){
-                    
+
                     if(ing[i][k].includes(nut[m])){
-                        
-                        
+
+
                         return "none";
-                        
+
                     }
                 }
         }
-         
-        }    
+
+        }
         }
         if(dairyToggle){
         for(var m in dairy){
-     
+
             for(i in ing){
                 for(k in ing[i]){
-                    
+
                     if(ing[i][k].includes(dairy[m])){
-                        
-                        
+
+
                         return "none";
-                        
+
                     }
                 }
         }
-         
-        }    
+
+        }
         }
 
       return d3.select(this).style('fill');
-        
+
     }  );
 }
 
@@ -289,7 +289,7 @@ function filter(){
   filterColor(greenToggle, orangeToggle, redToggle ,colorValue);
 
   switchFilterOut(ingredientsFromList());
-    
+
   let meatToggle = $("#Meat").prop( "checked" );
   let nutToggle = $("#Nuts").prop( "checked" );
   let dairyToggle = $("#Dairy").prop( "checked" );
